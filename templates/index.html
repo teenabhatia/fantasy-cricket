@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cricket Points Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">T20 World Cup</h1>
+        <div class="instructions-box">
+            <h2 class="subtitle">Manage Your Fantasy Cricket Team</h2>
+            <p class="intro-text">
+                This website allows you to manage your fantasy cricket team for the T20 World Cup.
+            </p>
+            <div class="description">
+                <strong>Fields and Buttons:</strong>
+                <ul>
+                    <li><strong>Player Name:</strong> Enter the name of the player you want to add to a friend's team.</li>
+                    <li><strong>Friend Name:</strong> Enter the name of the friend who owns the player.</li>
+                    <li><strong>Add Player to Friend:</strong> Click this button to assign the player to the friend.</li>
+                    <li><strong>Short Name:</strong> Enter the short name or nickname of a player.</li>
+                    <li><strong>Full Name:</strong> Enter the full name of the player corresponding to the short name.</li>
+                    <li><strong>Add Name Mapping:</strong> Click this button to add a mapping from the short name to the full name.</li>
+                    <li><strong>Cricbuzz URL:</strong> Enter the URL of the match scorecard from Cricbuzz to update points.</li>
+                    <li><strong>Update Points:</strong> Click this button to update the points based on the match data from Cricbuzz.</li>
+                    <li><strong>Show Scores:</strong> Click this button to display the current scores of all players and friends.</li>
+                </ul>
+                <br>
+                <strong>Current Point System:</strong>
+                <ul>
+                    <li>+1 point for each run scored</li>
+                    <li>+25 points for each wicket taken</li>
+                    <li>+5 points for each catch taken</li>
+                    <li>+5 points for each runout</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-container">
+            <form action="/add_player" method="POST">
+                <label for="player_name">Player Name:</label>
+                <input type="text" id="player_name" name="player_name">
+                <label for="friend_name">Friend Name:</label>
+                <input type="text" id="friend_name" name="friend_name">
+                <button type="submit">Add Player to Friend</button>
+            </form>
+
+            <form action="/add_mapping" method="POST">
+                <label for="short_name">Short Name:</label>
+                <input type="text" id="short_name" name="short_name">
+                <label for="full_name">Full Name:</label>
+                <input type="text" id="full_name" name="full_name">
+                <button type="submit">Add Name Mapping</button>
+            </form>
+
+            <form action="/update_points" method="POST">
+                <label for="url">Cricbuzz URL:</label>
+                <input type="text" id="url" name="url">
+                <button type="submit">Update Points</button>
+            </form>
+        </div>
+
+        <button class="show-scores-btn" onclick="getScores()">Show Scores</button>
+        <div id="scores-container">
+            <div id="scores"></div>
+            <div id="friend-points"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
